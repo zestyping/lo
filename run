@@ -1,0 +1,5 @@
+#!/bin/bash
+
+name=$1
+shift
+make build/$name && build/$name "$@"

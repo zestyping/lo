@@ -1,0 +1,16 @@
+min_depth 1.000000
+max_depth 5.999997
+x_width 640.000000
+y_height 460.000000
+c_flip 1.000000
+r_shift 0.000000
+cam_rot 0.000000
+y_shift 0.000000
+emit_min_v 6.799994
+emit_velf 0.030000
+friction 0.110000
+depth_step 0.150000
+hue_cycles 1.500000
+emit_valf 0.025000
+val_decay 0.910000
+max_val 255.000000

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+INCDIRS="-I /usr/local/Cellar/libfreenect/master/include/libfreenect -I../opc"
+LIBS="-L /usr/local/Cellar/libfreenect/master/lib -lfreenect"
+FRAMEWORKS="-framework OpenGL -framework GLUT"
+OPTS="-g $INCDIRS $LIBS $FRAMEWORKS"
+
+name=$1
+shift
+gcc -std=c99 $OPTS $name.c ../opc/opc_client.c -o build/$name && gdb build/$name

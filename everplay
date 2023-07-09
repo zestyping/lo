@@ -1,0 +1,13 @@
+#!/bin/bash
+
+cd $(dirname $0)
+rm -f /tmp/heartbeat /tmp/running
+touch /tmp/heartbeat /tmp/running
+./watchdog &
+while [ -f /tmp/running ]; do
+  ./run play bone
+  sleep 1
+done
+rm -f /tmp/running
+echo "everplay finished."
+sleep 2

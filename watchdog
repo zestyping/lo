@@ -1,0 +1,46 @@
+#!/bin/bash
+
+function older {
+  now=$(date '+%s')
+  modtime=$(stat -c '%Y' "$1")
+  age=$(( $now - $modtime ))
+  [ $age -gt $2 ]
+}
+
+touch /tmp/started
+touch /tmp/heartbeat
+while [ -f /tmp/running ]; do
+  sleep 1
+  if acpi -a | grep -q on; then
+    touch /tmp/acpower
+  else
+    echo
+    echo "AC power is off."
+    if older /tmp/acpower 30; then
+      echo
+      echo "No AC power for 30 seconds; shutting down."
+      sleep 2
+      sudo poweroff
+    fi
+    continue
+  fi
+  if older /tmp/heartbeat 20; then
+    echo
+    echo "No heartbeat for 20 seconds; rebooting."
+    sleep 2
+    sudo reboot
+  fi
+  if older /tmp/heartbeat 2; then
+    echo
+    echo "No heartbeat for 2 seconds; restarting."
+    killall play
+    sleep 2
+  fi
+  if older /tmp/started 7200; then
+    echo
+    echo "120 minutes of run time elapsed; rebooting."
+    sleep 2
+    sudo reboot
+  fi
+done
+echo "watchdog finished."

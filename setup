@@ -1,0 +1,7 @@
+#!/bin/bash
+
+sudo chown $USER /usr/local /usr/local/bin /usr/local/etc
+cd /usr/local/Library/Formula
+curl --insecure -O -L "https://github.com/OpenKinect/libfreenect/raw/master/platform/osx/homebrew/libfreenect.rb"
+curl --insecure -O -L "https://github.com/OpenKinect/libfreenect/raw/master/platform/osx/homebrew/libusb-freenect.rb"
+brew install libfreenect
